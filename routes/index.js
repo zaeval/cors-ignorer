@@ -26,7 +26,6 @@ router.get('/*', async function (req, res, next) {
         }
         res.send(responseData);
     } catch {
-        console.log(e.message);
         res.send("");
     }
 
@@ -37,6 +36,12 @@ function getFormData(object) {
     Object.keys(object).forEach(key => formData.append(key, object[key]));
     return formData;
 }
+function jsonToQueryString(json) {
+    return Object.keys(json).map(function(key) {
+            return encodeURIComponent(key) + '=' +
+                encodeURIComponent(json[key]);
+        }).join('&');
+}
 
 router.post('/*', async function (req, res, next) {
     const url = req.path.slice(1);
@@ -45,14 +50,13 @@ router.post('/*', async function (req, res, next) {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
         // headers['contentType'] = 'application/x-www-form-urlencoded';
-
+        //TODO: contentType 별로 body 바꿀 것!
         const body = JSON.parse(JSON.stringify(req.body));
-        console.log(        getFormData(body));
         const response = await fetch(url, {
             headers: headers,
             agent: httpsAgent,
             method: 'POST',
-            body: getFormData(body)
+            body: jsonToQueryString(body)
         });
 
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
@@ -60,10 +64,8 @@ router.post('/*', async function (req, res, next) {
         for (key in responseHeaders) {
             res.set(key, responseHeaders[key][0]);
         }
-        console.log(responseData);
         res.send(responseData);
     } catch (e) {
-        console.log(e.message);
         res.send("");
     }
 });
