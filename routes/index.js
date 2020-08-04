@@ -69,10 +69,13 @@ router.post('/*', async function (req, res, next) {
         for (key in responseHeaders) {
             console.log(key);
             if(key != "content-encoding") {
-                for (value of responseHeaders[key]) {
-                    res.set(key, value);
-                    console.log(value);
-                }
+
+                res.set(key,responseHeaders[key].join(";"));
+
+                // for (value of responseHeaders[key]) {
+                //     res.set(key, value);
+                //     console.log(value);
+                // }
             }
         }
         res.send(responseData);
