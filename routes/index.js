@@ -20,9 +20,9 @@ router.get('/*', async function (req, res, next) {
         const response = await fetch(url, {headers: headers, agent: httpsAgent, method: 'GET'});
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
-        // for (key in responseHeaders) {
-        //     res.set(key, responseHeaders[key][0]);
-        // }
+        for (key in responseHeaders) {
+            res.set(key, responseHeaders[key][0]);
+        }
         res.send(responseData);
     } catch {
         res.status(404).send('Something broke!');
@@ -60,9 +60,9 @@ router.post('/*', async function (req, res, next) {
 
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
-        // for (key in responseHeaders) {
-        //     res.set(key, responseHeaders[key].join(";"));
-        // }
+        for (key in responseHeaders) {
+            res.set(key, responseHeaders[key].join(";"));
+        }
         res.send(responseData);
     } catch (e) {
         res.status(404).send('Something broke!');
