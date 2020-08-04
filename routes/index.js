@@ -21,15 +21,13 @@ router.get('/*', async function (req, res, next) {
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            console.log(key);
             if(key != "content-encoding") {
-                for (value of responseHeaders[key]) {
-                    res.set(key, value);
-                    console.log(value);
-                }
+                res.set(key,responseHeaders[key].join(";"));
             }
         }
-        res.send(responseData);
+        // res.set("content-type","application/json");
+        const result = {data:responseData,headers:responseHeaders};
+        res.json(result);
     } catch {
         res.status(404).send('Something broke!');
     }
@@ -67,18 +65,13 @@ router.post('/*', async function (req, res, next) {
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            console.log(key);
             if(key != "content-encoding") {
-
                 res.set(key,responseHeaders[key].join(";"));
-
-                // for (value of responseHeaders[key]) {
-                //     res.set(key, value);
-                //     console.log(value);
-                // }
             }
         }
-        res.send(responseData);
+        // res.set("content-type","application/json");
+        const result = {data:responseData,headers:responseHeaders};
+        res.json(result);
     } catch (e) {
         res.status(404).send('Something broke!');
     }
