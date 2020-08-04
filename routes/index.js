@@ -22,9 +22,11 @@ router.get('/*', async function (req, res, next) {
         const responseData = await response.text();
         for (key in responseHeaders) {
             console.log(key);
-            for(value of responseHeaders[key]){
-                res.set(key, value);
-                console.log(value);
+            if(key != "content-encoding") {
+                for (value of responseHeaders[key]) {
+                    res.set(key, value);
+                    console.log(value);
+                }
             }
         }
         res.send(responseData);
@@ -66,9 +68,11 @@ router.post('/*', async function (req, res, next) {
         const responseData = await response.text();
         for (key in responseHeaders) {
             console.log(key);
-            for(value of responseHeaders[key]){
-                res.set(key, value);
-                console.log(value);
+            if(key != "content-encoding") {
+                for (value of responseHeaders[key]) {
+                    res.set(key, value);
+                    console.log(value);
+                }
             }
         }
         res.send(responseData);
