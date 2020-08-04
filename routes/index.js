@@ -23,7 +23,6 @@ router.get('/*', async function (req, res, next) {
         // for (key in responseHeaders) {
         //     res.set(key, responseHeaders[key][0]);
         // }
-        console.log(responseHeaders);
         res.send(responseData);
     } catch {
         res.status(404).send('Something broke!');
@@ -64,7 +63,6 @@ router.post('/*', async function (req, res, next) {
         // for (key in responseHeaders) {
         //     res.set(key, responseHeaders[key].join(";"));
         // }
-        console.log(responseHeaders);
         res.send(responseData);
     } catch (e) {
         res.status(404).send('Something broke!');
