@@ -21,9 +21,11 @@ router.get('/*', async function (req, res, next) {
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            responseHeaders[key].reduce((acc,cur)=>{
-                res.set(key, cur);
-            })
+            console.log(key);
+            for(value of responseHeaders[key]){
+                res.set(key, value);
+                console.log(value);
+            }
         }
         res.send(responseData);
     } catch {
@@ -63,9 +65,11 @@ router.post('/*', async function (req, res, next) {
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            responseHeaders[key].reduce((acc,cur)=>{
-                res.set(key, cur);
-            })
+            console.log(key);
+            for(value of responseHeaders[key]){
+                res.set(key, value);
+                console.log(value);
+            }
         }
         res.send(responseData);
     } catch (e) {
