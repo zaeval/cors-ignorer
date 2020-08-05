@@ -28,8 +28,8 @@ router.get('/*', async function (req, res, next) {
         // res.set("content-type","application/json");
         const result = {data:responseData,headers:responseHeaders};
         res.json(result);
-    } catch {
-        res.status(404).send('Something broke!');
+    } catch (e){
+        res.status(404).send(e.line + " " + e.message);
     }
 
 });
@@ -82,7 +82,7 @@ router.post('/*', async function (req, res, next) {
         const result = {data:responseData,headers:responseHeaders};
         res.json(result);
     } catch (e) {
-        res.status(404).send(e.message);
+        res.status(404).send(e.line + " " + e.message);
     }
 });
 module.exports = router;
