@@ -82,7 +82,7 @@ router.post('/*', async function (req, res, next) {
         const result = {data:responseData,headers:responseHeaders};
         res.json(result);
     } catch (e) {
-        res.status(404).send('Something broke!');
+        res.status(404).send(e.message);
     }
 });
 module.exports = router;
