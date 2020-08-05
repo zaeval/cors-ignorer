@@ -52,14 +52,23 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
+        let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
-        const body = JSON.parse(JSON.stringify(req.body));
+        if(headers['content-type']=='application/x-www-form-urlencoded'){
+            body = jsonToQueryString(body);
+        }
+        else if(headers['content-type']=='application/json'){
+            body = JSON.stringify(body);
+        }
+        else if(headers['content-type']=='multipart/form-data'){
+            body = getFormData(body);
+        }
         const response = await fetch(url, {
             headers: headers,
             agent: httpsAgent,
             method: 'POST',
-            body: jsonToQueryString(body)
+            body:body,
         });
 
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
