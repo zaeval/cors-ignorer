@@ -29,7 +29,7 @@ router.get('/*', async function (req, res, next) {
         const result = {data:responseData,headers:responseHeaders};
         res.json(result);
     } catch (e){
-        res.status(404).send(e.line + " " + e.message);
+        res.status(404).send(e.stack);
     }
 
 });
@@ -82,7 +82,7 @@ router.post('/*', async function (req, res, next) {
         const result = {data:responseData,headers:responseHeaders};
         res.json(result);
     } catch (e) {
-        res.status(404).send(e.line + " " + e.message);
+        res.status(404).send(e.stack);
     }
 });
 module.exports = router;
