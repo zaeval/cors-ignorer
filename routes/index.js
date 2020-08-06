@@ -63,7 +63,6 @@ router.post('/*', async function (req, res, next) {
             }
         }
         delete body.extraHeaders
-        console.log(headers, body);
         //TODO: contentType 별로 body 바꿀 것!
         if (headers['content-type'] == 'application/x-www-form-urlencoded') {
             body = jsonToQueryString(body);
