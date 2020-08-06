@@ -54,7 +54,7 @@ router.post('/*', async function (req, res, next) {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
         headers["cookie"] = 'NNB=LONEGBHN5MVF6';
-
+        headers["Sec-Fetch-Site"] = 'same-site';
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
