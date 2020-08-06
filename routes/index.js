@@ -59,44 +59,34 @@ router.post('/*', async function (req, res, next) {
         headers["x-forwarded-proto"] = undefined;
         headers["x-request-id"] = undefined;
         headers["x-request-start"] = undefined;
-        headers["referer"] = undefined;
+        headers["referer"] = "https://sell.smartstore.naver.com/";
         headers["connection"] = undefined;
         headers["connect-time"] = undefined;
         headers["via"] = undefined;
         headers["total-route-time"] = undefined;
         headers["connection"] = "keep-alive";
-        //
-        // accept: "*/*"
-        // accept-encoding: "gzip, deflate, br"
-        // accept-language: "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
-        // content-length: "101"
-        // content-type: "application/json"
-        // host: "sell.smartstore.naver.com"
-        // origin: "https://sell.smartstore.naver.com"
-        // sec-fetch-dest: "empty"
-        // sec-fetch-mode: "cors"
-        // sec-fetch-site: "same-origin"
-        // total-route-time: "0"
-        // user-agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
-        // x-current-state: "https://sell.smartstore.naver.com/#/login"
-        // x-current-statename: "login"
-        // x-to-statename: "login"
-        //
-        // accept: "*/*"
-        // accept-encoding: "gzip, deflate, br"
-        // accept-language: "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
-        // connection: "keep-alive"
-        // content-length: "101"
-        // content-type: "application/json"
-        // host: "sell.smartstore.naver.com"
-        // origin: "https://sell.smartstore.naver.com"
-        // sec-fetch-dest: "empty"
-        // sec-fetch-mode: "cors"
-        // sec-fetch-site: "same-origin"
-        // user-agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
-        // x-current-state: "https://sell.smartstore.naver.com/#/login"
-        // x-current-statename: "login"
-        // x-to-statename: "login"
+        headers[":authority"] = "sell.smartstore.naver.com";
+//     :authority: sell.smartstore.naver.com
+//     :method: POST
+//             :path: /api/login?url=https%253A%252F%252Fsell.smartstore.naver.com%252F%2523
+//     :scheme: https
+//         accept: */*
+// accept-encoding: gzip, deflate, br
+// accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+// cache-control: no-cache
+// content-length: 96
+// content-type: application/json;charset=UTF-8
+// cookie: NNB=LONEGBHN5MVF6
+// origin: https://sell.smartstore.naver.com
+// pragma: no-cache
+// referer: https://sell.smartstore.naver.com/
+// sec-fetch-dest: empty
+// sec-fetch-mode: cors
+// sec-fetch-site: same-origin
+// user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36
+// x-current-state: https://sell.smartstore.naver.com/#/login
+// x-current-statename: login
+// x-to-statename: login
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
