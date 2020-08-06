@@ -53,8 +53,19 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
-        headers["Cookie"] = 'NNB=LONEGBHN5MVF6';
-        headers["Sec-Fetch-Site"] = 'same-origin';
+        headers["sec-fetch-site"] = "same-origin";
+        // headers["x-forwarded-for"] = undefined;
+        // headers["x-forwarded-port"] = undefined;
+        // headers["x-forwarded-proto"] = undefined;
+        // headers["x-request-id"] = undefined;
+        // headers["x-request-start"] = undefined;
+        // headers["referer"] = "https://sell.smartstore.naver.com/";
+        // headers["connection"] = undefined;
+        // headers["connect-time"] = undefined;
+        // headers["via"] = undefined;
+        // headers["total-route-time"] = undefined;
+        // headers["connection"] = "keep-alive";
+        headers["cookie"]="NNB=LONEGBHN5MVF6";
 
         let body = JSON.parse(JSON.stringify(req.body));
 
