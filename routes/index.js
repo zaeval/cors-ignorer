@@ -56,9 +56,14 @@ router.post('/*', async function (req, res, next) {
 
         let body = JSON.parse(JSON.stringify(req.body));
 
-        for(key in body.extraHeaders){
+        for (key in body.extraHeaders) {
+            if (body.extraHeaders[key] == "null") {
+                headers[key] = null;
+            }
             headers[key] = body.extraHeaders[key];
         }
+        body.extraHeaders = null;
+
         //TODO: contentType 별로 body 바꿀 것!
         if (headers['content-type'] == 'application/x-www-form-urlencoded') {
             body = jsonToQueryString(body);
