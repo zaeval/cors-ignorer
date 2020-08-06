@@ -21,14 +21,14 @@ router.get('/*', async function (req, res, next) {
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            if(key != "content-encoding") {
-                res.set(key,responseHeaders[key].join(";"));
+            if (key != "content-encoding") {
+                res.set(key, responseHeaders[key].join(";"));
             }
         }
         // res.set("content-type","application/json");
-        const result = {data:responseData,headers:responseHeaders};
+        const result = {data: responseData, headers: responseHeaders};
         res.json(result);
-    } catch (e){
+    } catch (e) {
         res.status(404).send(e.stack);
     }
 
@@ -39,11 +39,12 @@ function getFormData(object) {
     Object.keys(object).forEach(key => formData.append(key, object[key]));
     return formData;
 }
+
 function jsonToQueryString(json) {
-    return Object.keys(json).map(function(key) {
-            return encodeURIComponent(key) + '=' +
-                encodeURIComponent(json[key]);
-        }).join('&');
+    return Object.keys(json).map(function (key) {
+        return encodeURIComponent(key) + '=' +
+            encodeURIComponent(json[key]);
+    }).join('&');
 }
 
 router.post('/*', async function (req, res, next) {
@@ -53,34 +54,37 @@ router.post('/*', async function (req, res, next) {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
         headers["sec-fetch-site"] = "same-origin";
+        headers["x-forwarded-for"] = undefined;
+        headers["x-forwarded-port"] = undefined;
+        headers["x-forwarded-proto"] = undefined;
+        headers["x-request-id"] = undefined;
+        headers["x-request-start"] = undefined;
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
-        if(headers['content-type']=='application/x-www-form-urlencoded'){
+        if (headers['content-type'] == 'application/x-www-form-urlencoded') {
             body = jsonToQueryString(body);
-        }
-        else if(headers['content-type']=='application/json'){
+        } else if (headers['content-type'] == 'application/json') {
             body = JSON.stringify(body);
-        }
-        else if(headers['content-type']=='multipart/form-data'){
+        } else if (headers['content-type'] == 'multipart/form-data') {
             body = getFormData(body);
         }
         const response = await fetch(url, {
             headers: headers,
             agent: httpsAgent,
             method: 'POST',
-            body:body,
+            body: body,
         });
 
         const responseHeaders = JSON.parse(JSON.stringify(response.headers.raw()));
         const responseData = await response.text();
         for (key in responseHeaders) {
-            if(key != "content-encoding") {
-                res.set(key,responseHeaders[key].join(";"));
+            if (key != "content-encoding") {
+                res.set(key, responseHeaders[key].join(";"));
             }
         }
         // res.set("content-type","application/json");
-        const result = {data:responseData,headers:responseHeaders,request:headers};
+        const result = {data: responseData, headers: responseHeaders, request: headers};
         res.json(result);
     } catch (e) {
         res.status(404).send(e.stack);
