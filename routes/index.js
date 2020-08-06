@@ -65,7 +65,7 @@ router.post('/*', async function (req, res, next) {
         headers["via"] = undefined;
         headers["total-route-time"] = undefined;
         headers["connection"] = "keep-alive";
-        headers[":authority"] = "sell.smartstore.naver.com";
+        headers["cookie"]="NNB=LONEGBHN5MVF6";
 //     :authority: sell.smartstore.naver.com
 //     :method: POST
 //             :path: /api/login?url=https%253A%252F%252Fsell.smartstore.naver.com%252F%2523
