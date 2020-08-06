@@ -59,7 +59,7 @@ router.post('/*', async function (req, res, next) {
         // headers["x-forwarded-proto"] = undefined;
         // headers["x-request-id"] = undefined;
         // headers["x-request-start"] = undefined;
-        // headers["referer"] = "https://sell.smartstore.naver.com/";
+        headers["referer"] = "https://sell.smartstore.naver.com/";
         headers["connect-time"] = undefined;
         headers["via"] = undefined;
         headers["total-route-time"] = undefined;
@@ -90,7 +90,7 @@ router.post('/*', async function (req, res, next) {
             }
         }
         // res.set("content-type","application/json");
-        const result = {data: responseData, headers: responseHeaders};
+        const result = {data: responseData, headers: responseHeaders, request: headers};
         res.json(result);
     } catch (e) {
         res.status(404).send(e.stack);
