@@ -52,6 +52,7 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
+        headers["sec-fetch-site"] = "same-origin";
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
@@ -79,7 +80,7 @@ router.post('/*', async function (req, res, next) {
             }
         }
         // res.set("content-type","application/json");
-        const result = {data:responseData,headers:responseHeaders};
+        const result = {data:responseData,headers:responseHeaders,request:headers};
         res.json(result);
     } catch (e) {
         res.status(404).send(e.stack);
