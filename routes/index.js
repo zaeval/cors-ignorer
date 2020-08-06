@@ -60,6 +60,10 @@ router.post('/*', async function (req, res, next) {
         headers["x-request-id"] = undefined;
         headers["x-request-start"] = undefined;
         headers["referer"] = undefined;
+        headers["connection"] = undefined;
+        headers["connect-time"] = undefined;
+        headers["via"] = undefined;
+
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
