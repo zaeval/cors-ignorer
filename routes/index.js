@@ -53,10 +53,10 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
-        headers["sec-fetch-site"] = "same-origin";
-        // headers["x-forwarded-for"] = undefined;
-        // headers["x-forwarded-port"] = undefined;
-        // headers["x-forwarded-proto"] = undefined;
+        // headers["sec-fetch-site"] = "same-origin";
+        headers["x-forwarded-for"] = undefined;
+        headers["x-forwarded-port"] = undefined;
+        headers["x-forwarded-proto"] = undefined;
         // headers["x-request-id"] = undefined;
         // headers["x-request-start"] = undefined;
         // headers["referer"] = "https://sell.smartstore.naver.com/";
