@@ -59,7 +59,7 @@ router.post('/*', async function (req, res, next) {
         headers["x-forwarded-proto"] = undefined;
         headers["x-request-id"] = undefined;
         headers["x-request-start"] = undefined;
-        // headers["referer"] = "https://sell.smartstore.naver.com/";
+        headers["referer"] = "https://sell.smartstore.naver.com/";
         headers["connect-time"] = undefined;
         headers["via"] = undefined;
         headers["total-route-time"] = undefined;
