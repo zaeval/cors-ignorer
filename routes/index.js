@@ -59,6 +59,7 @@ router.post('/*', async function (req, res, next) {
         headers["x-forwarded-proto"] = undefined;
         headers["x-request-id"] = undefined;
         headers["x-request-start"] = undefined;
+        headers["referer"] = undefined;
         let body = JSON.parse(JSON.stringify(req.body));
 
         //TODO: contentType 별로 body 바꿀 것!
