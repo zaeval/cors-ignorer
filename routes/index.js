@@ -53,7 +53,6 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
-        headers["cookie"]="NNB=LONEGBHN5MVF6";
 
         let body = JSON.parse(JSON.stringify(req.body));
 
