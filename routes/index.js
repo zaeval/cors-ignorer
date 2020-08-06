@@ -53,22 +53,12 @@ router.post('/*', async function (req, res, next) {
     try {
         headers["origin"] = new URL(url).origin;
         headers["host"] = new URL(url).host;
-        headers["sec-fetch-site"] = "same-origin";
-        headers["x-forwarded-for"] = undefined;
-        headers["x-forwarded-port"] = undefined;
-        headers["x-forwarded-proto"] = undefined;
-        headers["x-request-id"] = undefined;
-        headers["x-request-start"] = undefined;
-        // headers["referer"] = "https://sell.smartstore.naver.com/";
-        // headers["connection"] = undefined;
-        // headers["connect-time"] = undefined;
-        // headers["via"] = undefined;
-        // headers["total-route-time"] = undefined;
-        // headers["connection"] = "keep-alive";
-        headers["cookie"]="NNB=LONEGBHN5MVF6";
 
         let body = JSON.parse(JSON.stringify(req.body));
 
+        for(key in body.extraHeaders){
+            headers[key] = body.extraHeaders[key];
+        }
         //TODO: contentType 별로 body 바꿀 것!
         if (headers['content-type'] == 'application/x-www-form-urlencoded') {
             body = jsonToQueryString(body);
