@@ -57,13 +57,13 @@ router.post('/*', async function (req, res, next) {
         let body = JSON.parse(JSON.stringify(req.body));
 
         for (key in body.extraHeaders) {
-            if (body.extraHeaders[key] == "null") {
-                headers[key] = null;
-            }
             headers[key] = body.extraHeaders[key];
+            if (body.extraHeaders[key] == "null") {
+                delete headers[key]
+            }
         }
-        body.extraHeaders = null;
-
+        delete body.extraHeaders
+        console.log(headers, body);
         //TODO: contentType 별로 body 바꿀 것!
         if (headers['content-type'] == 'application/x-www-form-urlencoded') {
             body = jsonToQueryString(body);
